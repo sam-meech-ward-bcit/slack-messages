@@ -2,8 +2,6 @@ import React from 'react'
 import PostDetails from './index'
 import { actions } from '@storybook/addon-actions'
 
-const events = actions({ cardClicked: 'card clicked', likeClicked: 'like clicked', commentClicked: 'comment clicked' })
-
 export default {
   title: 'PostDetails',
   component: PostDetails,
@@ -18,5 +16,5 @@ const post = {
 }
 
 export const Default = () => (
-  <PostDetails {...events} post={post} />
+  <PostDetails post={post} />
 )

@@ -1,46 +1,34 @@
 import './App.css'
 
-import { useEffect, useState } from 'react'
+import MessagesPage from './layout/MessagesPage'
+import MessageDetailsPage from './layout/MessageDetailsPage'
 
-import { getMessages } from './network'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-import Post from './components/Post'
-
-
-function App() {
-
-  const [messages, setMessages] = useState()
-
-  useEffect(() => {
-    (async () => {
-      const result = await getMessages()
-      const messages = result.messages
-      setMessages(messages)
-    })()
-
-    // getMessages()
-    // .then(result => {
-    //   setMessages(result.messages)
-    // })
-
-  }, [])
-
+export default function App() {
   return (
-    <div className="App">
-      {
-        !messages ?
-        <p>Loading ...</p>
-      :
-      
-        messages.map(message => (
-          <Post 
-          key={message._id}
-          post={message}
-          ></Post>
-        ))
-      }
-    </div>
-  )
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/about">
+            <p>About 🤗</p>
+          </Route>
+          <Route path="/users">
+            <p>Users 🤗</p>
+          </Route>
+          <Route path="/messages/:messageId">
+            <MessageDetailsPage></MessageDetailsPage>
+          </Route>
+          <Route path="/">
+            <MessagesPage></MessagesPage>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
-
-export default App
